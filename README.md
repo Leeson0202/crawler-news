@@ -10,7 +10,7 @@
 
 ​		在新闻网站首页获取新闻url很简单，但获取的新闻url为未知标签且很难从新闻页面获取分类。根据对主流新闻网站的调研后，发现主流新闻网站的首页有清晰的分类栏（图1），根据分类栏的连接，可以观察到不同分类标签的url不同。
 
-![img](file:///C:\Users\Leeson\AppData\Local\Temp\ksohtml\wps19EF.tmp.jpg)
+![img](https://gitee.com/leeson0202/news/raw/main/resources/img/%E5%9B%BE%E7%89%871.png)
 
 图1 新浪首页分类栏
 
@@ -64,7 +64,7 @@
 
 ​		创建新闻数据集主要分为两个步骤，第一步是获取新闻url和对应的label列表保存到txt文件。从网站中获取新闻url和label列表，存入对应网站的txt文件中，用于判别下次爬取的新闻url是否与之重复；第二步是多线程获取新闻的详细信息并保存到json文件。从第一步对应网站的txt文件中加载url列表，通过多线程的方式提取新闻的标题和正文内容，最后存入对应网站的json文件。其主要框架如图2所示。
 
-![img](file:///C:\Users\Leeson\AppData\Local\Temp\ksohtml\wps19F0.tmp.jpg) 
+![img](https://gitee.com/leeson0202/news/raw/main/resources/img/%E5%9B%BE%E7%89%872.png) 
 
 ​			图2 爬虫--获取新闻分类数据集总框架
 
@@ -82,7 +82,7 @@
 
 ​		为了更好的获取新闻url列表和改善项目，将获取新闻url模块单独分出来很有必要。因为新闻url获取条件和数量很受限，后续更新数据集时，数据可能会重复。单独设立一个模块，可以很方便地更新新闻url，为后期多线程爬取新闻详情打下基础，操作较简单。本模块主要利用了第一点第2小点中的两个方法，其主要框架如图3。
 
-![img](file:///C:\Users\Leeson\AppData\Local\Temp\ksohtml\wps1A01.tmp.jpg) 
+![img](https://gitee.com/leeson0202/news/raw/main/resources/img/%E5%9B%BE%E7%89%873.png) 
 
 ​														图3 获取新闻url 框架
 
@@ -110,7 +110,7 @@
 
 ​		新闻url保存在了对应的txt文件后，随时可以爬取新闻url提取新闻详细信息并保存在json文件中，建立新闻分类数据集就大致完成了。多线程提取新闻详细信息框架如图4。
 
-![img](file:///C:\Users\Leeson\AppData\Local\Temp\ksohtml\wps1A02.tmp.jpg) 
+![img](https://gitee.com/leeson0202/news/raw/main/resources/img/%E5%9B%BE%E7%89%874.png) 
 
 ​		图4 多线程提取新闻详细信息框架
 
@@ -142,7 +142,7 @@
 
 ​		网站数据缺失即新闻url无效，此时找到的内容较少（非新闻内容）或内容不存在，所以需要淘汰这部分数据。在多线程爬取之前，分析了14632条新闻内容字数的分布，如图5。
 
-![img](file:///C:\Users\Leeson\AppData\Local\Temp\ksohtml\wps1A03.tmp.jpg) 
+![img](https://gitee.com/leeson0202/news/raw/main/resources/img/%E5%9B%BE%E7%89%871.png) 
 
 ​			图5 新闻字数分布柱状图
 
@@ -154,13 +154,13 @@
 
 ### 3. 数据出现不相关的广告等内容
 
-![img](file:///C:\Users\Leeson\AppData\Local\Temp\ksohtml\wps1A04.tmp.png)![img](file:///C:\Users\Leeson\AppData\Local\Temp\ksohtml\wps1A05.tmp.png)![img](file:///C:\Users\Leeson\AppData\Local\Temp\ksohtml\wps1A06.tmp.png)![img](file:///C:\Users\Leeson\AppData\Local\Temp\ksohtml\wps1A07.tmp.png)![img](file:///C:\Users\Leeson\AppData\Local\Temp\ksohtml\wps1A08.tmp.jpg) 
+![img](https://gitee.com/leeson0202/news/raw/main/resources/img/%E5%9B%BE%E7%89%876.png)
 
-​					图6 新闻详细页
+​					图5 新闻详细页
 
  
 
-​		如图6，新闻详细页可能会出现广告连接等非新闻主体信息，可以分布在文章前，中，后。因此我们要对每一新闻都要进行筛选。但是发现这种隐蔽性的文字比较困难，这个过程非常费时间，因此我们采用xlsx查看寻找相同项的方法。我主要的清理流程为：初步清理、在xlsx文件中观察搜索相同信息，在代码中添加需要清理匹配内容。重复第二步和第三步。最终得到较为“干净”的数据。
+​		如图5，新闻详细页可能会出现广告连接等非新闻主体信息，可以分布在文章前，中，后。因此我们要对每一新闻都要进行筛选。但是发现这种隐蔽性的文字比较困难，这个过程非常费时间，因此我们采用xlsx查看寻找相同项的方法。我主要的清理流程为：初步清理、在xlsx文件中观察搜索相同信息，在代码中添加需要清理匹配内容。重复第二步和第三步。最终得到较为“干净”的数据。
 
  
 
